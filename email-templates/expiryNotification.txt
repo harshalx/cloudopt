@@ -1,0 +1,14 @@
+Hello User, 
+Your instance {{ instanceId }} is about to expire in {{ days }} days. You can consider doing the following:
+
+1. If you no longer need the instance and have finished your work with it, DO NOTHING and ignore this email. Instance 
+{{ instanceId }} will be automatically terminated. 
+
+2. If you have outstanding work that needs to be backed-up or if you need to convert your work into an AMI or Docker Images,
+now is the time. Once you are done with this, leave your instance as it is. It will be automatically terminated.
+
+3. If you don't want this instance to be terminated and hang around longer for your work to finish, hit the URL below. This will 
+give you an extension of one week to your instance.
+
+Thanks and Regards,
+Your Automated Cloud Optimizer
