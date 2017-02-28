@@ -26,11 +26,13 @@ InstanceExpiryEvaluator.prototype.evaluate = function (instance) {
     diff = now.diff(targetdt, "days");
     console.log("diff is days=" + diff);  
     
-    if(diff > 0) 
+    if(diff > 0) {
       instance.expired = true;
+      instance.daysToExpiry = diff;
+    }
     else {
       instance.expired = false;
-      instance.daysToExpiry = (diff * -1);
+      instance.daysToExpiry = diff;
     }
       
 
@@ -41,16 +43,17 @@ InstanceExpiryEvaluator.prototype.evaluate = function (instance) {
     
     //console.log("instance=" + JSON.stringify(instance.Tags[0].Value));
     console.log("Days to be alive=" + configuredExpiryDays);
-    //var configuredExpiryDays = expiryDurationPolicyConfig.Development;
     targetDt = launchDt.clone().add(configuredExpiryDays, "days");
     diff = now.diff(targetDt, "days");
     console.log("diff is days=" + diff);  
     
-    if(diff > 0) 
+    if(diff > 0) {
       instance.expired = true;
+      instance.daysToExpiry = diff;
+     }
     else {
       instance.expired = false;
-      instance.daysToExpiry = (diff * -1);
+      instance.daysToExpiry = diff;
     }
  } //the else
   console.log("instance=" +  JSON.stringify(instance));

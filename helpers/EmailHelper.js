@@ -39,11 +39,16 @@ function EmailHelper() {
 }
 
 EmailHelper.prototype.sendEmail = function(instance) {
- console.log("instance=" + JSON.stringify(instance));
+ console.log("EmailHelper::instance=" + JSON.stringify(instance));
  nunjucks.configure("./email-templates", { autoescape: true });
   var obj = {instanceId : instance.InstanceId, 
-             days : instance.daysToExpiry};
-  var email = 
+             days : (instance.daysToExpiry < 0) ? (instance.daysToExpiry * -1) : instance.daysToExpiry };
+  var email;
+  if( instance.daysToExpiry > 0) {
+   email = 
+     nunjucks.render("alreadyExpiredNotification.txt", obj); 
+  }else
+   email = 
      nunjucks.render("expiryNotification.txt", obj);
  //set message body
  this.sesParams.Message.Body.Text.Data = email;
@@ -51,7 +56,7 @@ EmailHelper.prototype.sendEmail = function(instance) {
  var subj = 
      nunjucks.renderString("Instance {{ instanceId }} is about to expire", {instanceId: instance.InstanceId});
  //console.log("subj=" + subj);
- //this.sesParams.Message.Subject.Data = subj;
+ this.sesParams.Message.Subject.Data = subj;
   
  ses.sendEmail(this.sesParams, function(err, data) {
   if (err) console.log(err, err.stack); // an error occurred
@@ -69,5 +74,5 @@ var ec2Instance = {
       daysToExpiry: 2
     };
 
-new EmailHelper().sendEmail(ec2Instance);
+//new EmailHelper().sendEmail(ec2Instance);
 module.exports = EmailHelper;

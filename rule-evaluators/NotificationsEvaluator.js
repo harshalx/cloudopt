@@ -1,6 +1,7 @@
 var instanceHelper = require('../helpers/InstanceHelper.js');
 var policyConfig = require('../config/Policy.js');
 var expiryDurationPolicyConfig = require('../config/ExpiryDurationPolicy.js');
+var EmailHelper = require('../helpers/EmailHelper.js');
 var moment = require('moment');
 
 var ec2Instance = {
@@ -10,10 +11,11 @@ var ec2Instance = {
     };
 //Evaluates the instance for notifications to be sent out to the users periodically
 function NotificationsEvaluator() {
-  function evaluate(instance) {
-    if(instance.daysToExpiry<=7) {
-      
-    }
+  var emailHelper = new EmailHelper();
+  NotificationsEvaluator.prototype.evaluate = function(instance) {
+    if(instance.daysToExpiry<=7) 
+      console.log("sending email");
+      emailHelper.sendEmail(instance);
   }
 }
 

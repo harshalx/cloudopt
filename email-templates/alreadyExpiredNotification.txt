@@ -1,0 +1,5 @@
+Hello User, 
+Your instance {{ instanceId }} has already expired {{ days }} days ago. It has been successfully terminated.
+
+Thanks and Regards,
+Your Automated Cloud Optimizer
