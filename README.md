@@ -1,4 +1,4 @@
-# cloudopt - The AWS Clod Optimizer project
+# cloudopt - The AWS Cloud Optimizer project
 
 With a growing AWS footprint, the bills climb quickly and become a major concern to the management. This puts the AWS admins to the task of establishing governance and forcing some 
 policies within the teams. This project aims at defining and standardizing those policies and automating the task of cleaning up the instances once those policy requirements are met. 
