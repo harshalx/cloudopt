@@ -85,6 +85,10 @@ var InstanceHelper = {
         reject(err);
      });
     });
+  },
+  
+  stopInstance: function stopInstance(instance) {
+    
   }
 }
 

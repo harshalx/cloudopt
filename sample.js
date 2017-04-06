@@ -38,7 +38,7 @@ var fetchRunningInstances = function() {
   ec2.describeInstances(params,  function (err, data) {
         if (err) console.log(err, err.stack); // an error occurred
         else {     
-         console.log(data);           // successful response        
+         //console.log(data);           // successful response        
         //list all instance-ids and their launch times
         for( var rcount = 0; rcount < data.Reservations.length; rcount++){
           //console.log("in reservations loop " + rcount);
@@ -57,7 +57,7 @@ var fetchRunningInstances = function() {
         //call describeInstances again with the changed nextToken
         //change the value of nextToken
         nextToken = data.NextToken;
-        console.log("nextToken=" + nextToken);
+        //console.log("nextToken=" + nextToken);
         params.NextToken = nextToken;
 
         if(nextToken == null || nextToken === '' || nextToken == 'undefined') {
@@ -76,7 +76,7 @@ function evauateRules(instances) {
      mte.evaluate(instance).then(
       function (retVal) {        
         instance = iee.evaluate(retVal);
-        console.log("post iee" + JSON.stringify(instance));
+        //console.log("post iee" + JSON.stringify(instance));
         ne.evaluate(instance);
       }
      );
