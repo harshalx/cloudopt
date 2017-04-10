@@ -42,8 +42,9 @@ var ec2 = new AWS.EC2();
 
 var ec2Instance = {
       //InstanceId: "i-0319833a04f4a2993", 
-      InstanceId: "i-01454cb7198a7c0bc",
-      LaunchTime: "Tue Sep 22 2015 00:00:00 GMT-0400 (EDT)"
+      InstanceId: "i-09da3d1f9fac42456",
+      LaunchTime: "Tue Sep 22 2015 00:00:00 GMT-0400 (EDT)",
+      expired: true
     };
 
 
@@ -87,17 +88,34 @@ var InstanceHelper = {
     });
   },
   
-  stopInstance: function stopInstance(instance) {
-    
-  }
+  stopInstances: function stopInstances(instances) {
+    var params = {
+      InstanceIds: [],
+      DryRun: false,
+   };
+    console.log("stopInstances:to be deleted = " + instances);
+    params.InstanceIds = instances;
+    ec2.stopInstances(params, function(err, data) {
+      if (err) console.log(err, err.stack); // an error occurred
+      else     console.log(data);           // successful response
+    });
+   },
+  
+  terminateInstances: function terminateInstances(instances) {
+      var params = {
+        InstanceIds: [],
+        DryRun: false,
+     };
+      console.log("terminateInstances:to be deleted = " + instances);
+      params.InstanceIds = instances;
+      ec2.terminateInstances(params, function(err, data) {
+        if (err) console.log(err, err.stack); // an error occurred
+        else     console.log(data);           // successful response
+      });
+    }
 }
 
 //main
-/*InstanceHelper.describeTags(ec2Instance).then(
-  function(val) {
-    console.log("tags");
-    console.log(val);
-  }
-);*/
+//InstanceHelper.terminateInstances([ec2Instance.InstanceId, 'i-7eddd666']);
 //console.log("exit");
 module.exports = InstanceHelper;

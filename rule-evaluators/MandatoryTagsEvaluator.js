@@ -16,13 +16,13 @@ MandatoryTagsEvaluator.prototype.evaluate = function (instance) {
   instanceHelper.describeTags(instance).then(
     function(returnVal) {
       if( returnVal.Tags.length === 0) {
-        console.log("MandatoryTagsEvaluator::evaluate =" + instance.InstanceId  + "tag absent");
+        console.log("MandatoryTagsEvaluator::evaluate = mandatory tag absent " + instance.InstanceId);
         instance.MandatoryTag = false;
         instance.Tags = null;
         resolve(instance);
       }
       else {
-        console.log("mandatory tag present");
+        console.log("MandatoryTagsEvaluator::evaluate = mandatory tag present " + instance.InstanceId);
         instance.MandatoryTag = true;
         instance.Tags = returnVal.Tags;
         resolve(instance);

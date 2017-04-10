@@ -14,12 +14,18 @@ var ec2Instance = {
 function ActionsEvaluator() {
   
   ActionsEvaluator.prototype.evaluate = function(instance) {
+    console.log("ActionsEvaluator::Enter");
     if (instance.expired === true) {
-      
-    } else {
-      
-    }
+      console.log("ActionsEvaluator::stopping..")
+      if (policyConfig.instanceTerminationPolicy == "Stop") {
+        instanceHelper.stopInstances([instance.InstanceId]);
+      }
+      else if (policyConfig.instanceTerminationPolicy == "Terminate") {
+        console.log("ActionsEvaluator::Terminating..");
+        instanceHelper.terminateInstances([instance.InstanceId]);
+      }
   }
+}
 }
 
 //main

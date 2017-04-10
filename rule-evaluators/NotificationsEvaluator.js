@@ -13,9 +13,10 @@ var ec2Instance = {
 function NotificationsEvaluator() {
   var emailHelper = new EmailHelper();
   NotificationsEvaluator.prototype.evaluate = function(instance) {
-    if(instance.daysToExpiry<=7) 
+    if(instance.daysToExpiry >= -5) {
       console.log("sending email");
       emailHelper.sendEmail(instance);
+    }
   }
 }
 

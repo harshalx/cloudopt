@@ -6,6 +6,7 @@ var instanceHelper = require('./helpers/InstanceHelper.js');
 var MandatoryTagsEvaluator = require('./rule-evaluators/MandatoryTagsEvaluator.js');
 var InstanceExpiryEvaluator = require('./rule-evaluators/InstanceExpiryEvaluator.js');
 var NotificationsEvaluator = require('./rule-evaluators/NotificationsEvaluator.js');
+var ActionsEvaluator = require('./rule-evaluators/ActionsEvaluator.js');
 
 AWS.config.update({region:'us-west-2', apiVersion: 'latest'});
 
@@ -25,10 +26,10 @@ var params = {
     }
   ],
   InstanceIds: [
-    'i-01959d99ce1d19f99',
-    'i-01e7eabbd7b2fea06',
-    'i-0dc6fb7dd4151471d',
-    'i-0ca5284a92cac2692'
+    'i-01f1734ddabf0e8a6',
+    'i-042175b47acfffa65',
+    'i-00c98fcecc18e86e2',
+    'i-0caafe8daa326eac3'
   ],
   //MaxResults: 100,
  // NextToken: nextToken
@@ -70,6 +71,7 @@ function evauateRules(instances) {
   var mte = new MandatoryTagsEvaluator();
   var iee = new InstanceExpiryEvaluator();
   var ne = new NotificationsEvaluator();
+  var ae = new ActionsEvaluator();
   
   for(var count=0; count < runningInstances.length; count++) {
      var instance = runningInstances[count];
@@ -78,6 +80,7 @@ function evauateRules(instances) {
         instance = iee.evaluate(retVal);
         //console.log("post iee" + JSON.stringify(instance));
         ne.evaluate(instance);
+        ae.evaluate(instance);
       }
      );
     //console.log("before ne" + JSON.stringify(instance));
